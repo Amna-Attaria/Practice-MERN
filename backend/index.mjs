@@ -31,11 +31,19 @@ app.use("/api/auth",userRoutes)
 app.use("/api/cart",cartRoutes)
 app.use('/api/products', productRoutes);
 
+
 app.use("/", (req, res, next) => {
   console.log("Request URL:", req.url, "method: ", req.method);
   next();
 });
 
+
+process.on('uncaughtException', (err) => {
+	console.error('UNCAUGHT EXCEPTION! 💥', err.name, err.message);
+	process.exit(1);
+  });
+  
+  
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);
 });

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-
+const apiUrl = import.meta.env.VITE_API_BASE_URL;
 const Update = () => {
   const [userData, setUserData] = useState({ name: "", email: "" });
   const [userId, setUserId] = useState(null); // ✅ Added userId state
@@ -17,7 +17,7 @@ const Update = () => {
       }
 
       try {
-        const response = await fetch("http://localhost:5000/api/auth/user/me", {
+        const response = await fetch(`${apiUrl}/api/auth/user/me`, {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
@@ -51,7 +51,7 @@ const Update = () => {
 
     try {
       const token = localStorage.getItem("token");
-      const response = await fetch(`http://localhost:5000/api/auth/user/${userId}`, {
+      const response = await fetch(`${apiUrl}/auth/user/${userId}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
